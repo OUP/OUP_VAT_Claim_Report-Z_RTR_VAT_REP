@@ -1,0 +1,64 @@
+<core:FragmentDefinition 
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:u="sap.ui.unified">
+
+    <table:TreeTable
+        id="idVatReportTreeTable"
+        rows="{ path: 'oVatReportModel>/', parameters: {arrayNames:['boxes']} }"
+        selectionMode="None"
+        ariaLabelledBy="title"
+        visible="{= ${oViewModel>/sourceName} === 'BS'}">
+        
+        <!-- tool bar -->
+        <table:extension>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Export" press=".onExportPress" type="Emphasized"/>
+            </OverflowToolbar>
+        </table:extension>
+
+        <!-- columns -->
+        <table:columns>
+            <table:Column width="15%">
+                <Label text="{/#VAT_REPORT/BoxDes/@sap:label}"/>
+                <table:template>
+                    <Text text="{oVatReportModel>BoxDes}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="25%">
+                <Label text="{/#VAT_REPORT/BoxTitle/@sap:label}"/>
+                <table:template>
+                    <Text text="{oVatReportModel>BoxTitle}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="15%">
+                <Label text="{/#VAT_REPORT/CompanyCode/@sap:label}"/>
+                <table:template>
+                    <Text text="{oVatReportModel>CompanyCode}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="15%">
+                <Label text="{/#VAT_REPORT/TaxCode/@sap:label}"/>
+                <table:template>
+                    <Text text="{oVatReportModel>TaxCode}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="10%">
+                <Label text="{/#VAT_REPORT/VatPercent/@sap:label}"/>
+                <table:template>
+                    <Text text="{oVatReportModel>VatPercent}" wrapping="false" />
+                </table:template>
+            </table:Column>
+            <table:Column width="20%">
+                <Label text="{/#VAT_REPORT/Amount/@sap:label}"/>
+                <table:template>
+                    <u:Currency value="{oVatReportModel>Amount}" currency="{oVatReportModel>Waers}" useSymbol="false"/>
+                </table:template>
+            </table:Column>
+        </table:columns>
+
+    </table:TreeTable>
+
+</core:FragmentDefinition>

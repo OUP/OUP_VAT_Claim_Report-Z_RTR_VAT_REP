@@ -1,0 +1,21 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/sap/ZRTR_MTD_VAT_EXTRACT_SRV/$metadata">
+        <edmx:Include Namespace="ZRTR_MTD_VAT_EXTRACT_SRV" Alias="SAP" />
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="oup.rtr">
+            <Annotations Target="SAP.ZRTR_C_VAT_TAX_EXTRACTType">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>CalendarMonth</PropertyPath>
+                        <PropertyPath>CalendarYear</PropertyPath>
+                        <PropertyPath>CompanyCode</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

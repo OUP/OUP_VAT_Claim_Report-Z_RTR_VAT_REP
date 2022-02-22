@@ -1,0 +1,87 @@
+<!--
+
+    Copyright (C) OUP company. All rights reserved.
+
+-->
+<mvc:View 
+    controllerName="oup.rtr.vatclaimreport.controller.Main"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    displayBlock="true" 
+    xmlns="sap.m"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+    <Shell id="shell" appWidthLimited="false">
+        <App id="app">
+            <pages> 
+                <f:DynamicPage 
+                    id="dynamicPage"
+                    showFooter="{= ${oViewModel>/action} !== 'Report' }">
+                    <!-- DynamicPage Title -->
+                    <f:title>
+                        <f:DynamicPageTitle>
+                            <f:heading>
+                                <Title text="{i18n>appTitle}" />
+                            </f:heading>
+                            <f:snappedContent>
+                                <Text text="{oViewModel>/filterStatus}" />
+                            </f:snappedContent>
+                        </f:DynamicPageTitle>
+                    </f:title>
+                    
+                    <!-- DynamicPage Header -->
+                    <f:header>
+                        <f:DynamicPageHeader>
+                            <f:content>
+
+                                <smartFilterBar:SmartFilterBar 
+                                    id="smartFilterBar"
+                                    useToolbar="false" 
+                                    entitySet="ZRTR_C_VAT_TAX_EXTRACT"
+                                    assignedFiltersChanged="onAssignedFiltersChanged"
+                                    initialized=".onFilterBarInitialized"
+                                    liveMode="false"
+                                    search=".onFilterBarGoPress">
+
+                                    <smartFilterBar:controlConfiguration>
+                                        <smartFilterBar:ControlConfiguration
+                                                key="SourceName" index="0" label="Source Name"
+                                                groupId="_BASIC" mandatory="mandatory"
+                                                visibleInAdvancedArea="true">
+                                            <smartFilterBar:customControl>
+                                                <Select selectedKey="BT" customData:hasValue="true">
+                                                    <core:Item key="BT" text="Box Totals"/>
+                                                    <core:Item key="BS" text="Box Totals with Source Entites"/>
+                                                </Select>
+                                            </smartFilterBar:customControl>
+                                        </smartFilterBar:ControlConfiguration>
+                                    </smartFilterBar:controlConfiguration>
+
+                                    <!-- layout data used to make the table growing but the filter bar fixed -->
+                                    <smartFilterBar:layoutData>
+                                        <FlexItemData shrinkFactor="0"/>
+                                    </smartFilterBar:layoutData>
+                                </smartFilterBar:SmartFilterBar>
+
+                            </f:content>
+                        </f:DynamicPageHeader>
+                    </f:header>
+
+                    <!-- DynamicPage Content -->
+                    <f:content>
+                        <!-- dynamic table -->
+                        <VBox>
+                            <core:Fragment fragmentName="oup.rtr.vatclaimreport.view.fragment.BT" type="XML" />
+                            <core:Fragment fragmentName="oup.rtr.vatclaimreport.view.fragment.BS" type="XML" />
+                            <core:Fragment fragmentName="oup.rtr.vatclaimreport.view.fragment.BS_Download" type="XML" />
+                        </VBox>
+                    </f:content>
+
+                </f:DynamicPage>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
